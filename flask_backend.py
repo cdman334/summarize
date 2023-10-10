@@ -45,7 +45,17 @@ def generate_summary(text, num_sentences=3):
     summary = sorted_sentences[:num_sentences]
     return " ".join(summary)
 
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder="static", template_folder="static")
+
+@app.route('/')
+def main_page():
+    return app.send_static_file('index.html')
+
+
+@app.route('/')
+def main_page():
+    return app.send_static_file('index.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
